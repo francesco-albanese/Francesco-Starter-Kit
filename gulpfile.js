@@ -1,0 +1,120 @@
+// include gulp and plugins
+var gulp             = require('gulp'),
+    gutil            = require('gulp-util'),
+    watch            = require('gulp-watch'),
+    jade             = require('gulp-jade'),
+    sass             = require('gulp-sass'),
+    uglify           = require('gulp-uglify'),
+    imageMin         = require('gulp-imagemin'),
+    autoprefixer     = require('gulp-autoprefixer'),
+    minifyCss        = require('gulp-cssnano'),
+    browserSync      = require('browser-sync').create(),
+    rename           = require('gulp-rename'),
+    jshint           = require('gulp-jshint'),
+    sourcemaps       = require('gulp-sourcemaps'),
+    onError = function(err) {
+      gutil.log(gutil.colors.red('ERROR', err.plugin), err.message);
+      gutil.beep();
+      new gutil.PluginError(err.plugin, err, {showStack: true})
+      this.emit('end');
+    };
+
+// Define all the tasks
+
+// jade
+
+gulp.task('jade', function() {
+  return gulp.src('app/jade/*.jade')
+    .pipe(jade())
+    .on('error', onError)
+    .pipe(gulp.dest('app'))
+    .pipe(browserSync.reload({stream:true}))
+    .pipe(gulp.dest('dist'))
+});
+
+// Sass
+
+var sassOptions = {
+  errLogToConsole: true,
+  outputStyle: 'expanded',
+};
+
+gulp.task('sass', function () {
+  return gulp.src('app/scss/main.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOptions))
+    .on('error', onError)
+    .pipe(autoprefixer(['last 10 versions'], { cascade: true }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('app/css/')) // compile CSS not minified, for testing purposes
+    // .pipe(ignore.exclude('main.css.map'))
+    // .pipe(rename({ suffix: '.min' }))
+    // .pipe(minifyCss())
+    // .pipe(gulp.dest('app/css/'))
+    // .pipe(gulp.dest('dist/css/'))
+    .pipe(browserSync.reload({stream:true}))
+});
+
+// Minify CSS
+
+gulp.task('minifyCss', function() {
+  return gulp.src('app/css/main.css')
+    .pipe(minifyCss())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest('app/css/'))
+    .pipe(gulp.dest('dist/css/'))
+});
+
+// Js minification
+
+gulp.task('compress', function() {
+  return gulp.src(['app/js/*.js', '!app/js/modernizr.min.js', '!app/js/touchGallery.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .pipe(uglify())
+    .on('error', onError)
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest('dist/js/'))
+    .pipe(browserSync.reload({stream:true}))
+});
+
+// Images compression
+
+gulp.task('images', function() {
+  return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
+  .pipe(imageMin({
+    optimizationLevel: 5,
+    progressive: true,
+    interlaced: true
+  }))
+  .on('error', onError)
+  .pipe(gulp.dest('dist/images'))
+});
+
+// Browser Sync
+
+gulp.task('browser-sync', ['jade', 'sass', 'compress'],  function() {
+  browserSync.init({
+      server: {
+          baseDir: "app"
+      },
+      keepalive: true,
+      notify:false,
+      reloadOnRestart: true,
+      tunnel: false,
+      // tunnel: 'test'
+  });
+});
+
+// Watch for changes, recompile jade & Sass and reload browserSync
+
+gulp.task('watch', function() {
+  gulp.watch('app/jade/**/*.jade', ['jade']);
+  gulp.watch('app/scss/**/*.scss', ['sass', 'minifyCss']);
+  gulp.watch('app/js/*.js', ['compress']);
+  gulp.watch('app/images/**/*.+(png|jpg|jpeg|gif|svg)', ['images']);
+});
+
+
+// default gulp task
+gulp.task('default', ['browser-sync', 'watch', ]);
