@@ -19,12 +19,24 @@ var gulp             = require('gulp'),
       this.emit('end');
     };
 
+var sources = {
+  "jade": "app/jade/*.jade",
+  "sass": "app/scss/main.scss",
+  "minifyCss": "app/css/main.css",
+  "compress": [
+    'app/js/*.js',
+    '!app/js/modernizr.min.js',
+    '!app/js/touchGallery.js'
+  ],
+  "images": "app/images/**/*.+(png|jpg|jpeg|gif|svg)"
+};
+
 // Define all the tasks
 
 // jade
 
 gulp.task('jade', function() {
-  return gulp.src('app/jade/*.jade')
+  return gulp.src(sources.jade)
     .pipe(jade())
     .on('error', onError)
     .pipe(gulp.dest('app'))
@@ -40,25 +52,20 @@ var sassOptions = {
 };
 
 gulp.task('sass', function () {
-  return gulp.src('app/scss/main.scss')
+  return gulp.src(sources.sass)
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions))
     .on('error', onError)
     .pipe(autoprefixer(['last 10 versions'], { cascade: true }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('app/css/')) // compile CSS not minified, for testing purposes
-    // .pipe(ignore.exclude('main.css.map'))
-    // .pipe(rename({ suffix: '.min' }))
-    // .pipe(minifyCss())
-    // .pipe(gulp.dest('app/css/'))
-    // .pipe(gulp.dest('dist/css/'))
     .pipe(browserSync.reload({stream:true}))
 });
 
 // Minify CSS
 
 gulp.task('minifyCss', function() {
-  return gulp.src('app/css/main.css')
+  return gulp.src(sources.minifyCss)
     .pipe(minifyCss())
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('app/css/'))
@@ -68,7 +75,7 @@ gulp.task('minifyCss', function() {
 // Js minification
 
 gulp.task('compress', function() {
-  return gulp.src(['app/js/*.js', '!app/js/modernizr.min.js', '!app/js/touchGallery.js'])
+  return gulp.src(sources.compress)
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(uglify())
@@ -81,7 +88,7 @@ gulp.task('compress', function() {
 // Images compression
 
 gulp.task('images', function() {
-  return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
+  return gulp.src(sources.images)
   .pipe(imageMin({
     optimizationLevel: 5,
     progressive: true,

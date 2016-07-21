@@ -24,9 +24,13 @@ module.exports = function(grunt) {
         }, // end jade
 
         sass: {
+            options: {
+			        sourceMap: true
+    		    },
             build: {
                 options: {
-                    style: 'expanded'
+                  style: 'expanded',
+                  sourcemap: 'auto'
                 },
                 files: [ {
                     cwd: './app/scss/',
@@ -41,20 +45,25 @@ module.exports = function(grunt) {
         postcss: {
             build: {
                 options: {
-                    map: {
-                        inline: false,
-                        annotation: 'app/css/'
-                    },
                     processors: [
-                        require('autoprefixer')({browsers: 'last 10 versions'}),
+                        require('autoprefixer')({browsers: 'last 5 versions'}),
+                    ]
+                },
+                files: {
+                    'app/css/main.css' : 'app/css/main.css',
+                }
+            },
+            minify: {
+                options: {
+                    processors: [
                         require('cssnano')()
                     ]
                 },
                 files: {
-                    'app/css/main.min.css' : 'app/css/main.css',
-                    'dist/css/main.min.css' : 'app/css/main.css'
+                    'dist/css/main.min.css' : 'app/css/main.css',
+                    'app/css/main.min.css' : 'app/css/main.css'
                 }
-            },
+            }
         }, // end postcss
 
         jshint: {
@@ -109,15 +118,21 @@ module.exports = function(grunt) {
                     ]
                 },
                 options: {
+                    keepalive: true,
+                    notify:false,
+                    reloadOnRestart: true,
                     watchTask: true,
-                    server: './app'
+                    watchOptions: {
+                        ignored: ''
+                    },
+                    server: './app',
                 }
             }
         }, // end browserSync
 
         watch: {
             jade: {
-                files: 'app/jade/*.jade',
+                files: './app/jade/**/*.jade',
                 tasks: ['jade']
             },
             stylesheet: {
