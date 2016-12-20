@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
-    require('load-grunt-tasks')(grunt); // required to load cssnano and sass
+    require('load-grunt-tasks')(grunt); // required to load cssnano and sass and babel
+    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks); // automatically load all grunt plugins
 
     // Project configuration
     grunt.initConfig({
@@ -13,7 +14,9 @@ module.exports = function(grunt) {
                     dest: 'dist/',
                     expand: true,
                     ext: '.html'
-                }, {
+                },
+                // compile jade files in app folder for debug purpose
+                {
                     cwd: './app/jade/',
                     src: '*.jade',
                     dest: './app',
@@ -29,8 +32,8 @@ module.exports = function(grunt) {
     		    },
             build: {
                 options: {
-                  style: 'expanded',
-                  sourcemap: 'auto'
+                    style: 'expanded',
+                    sourcemap: 'auto'
                 },
                 files: [ {
                     cwd: './app/scss/',
@@ -45,7 +48,7 @@ module.exports = function(grunt) {
         postcss: {
             build: {
                 options: {
-                    map: true,
+                  map: true,
                     processors: [
                         require('autoprefixer')({browsers: 'last 5 versions'}),
                     ]
@@ -62,6 +65,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'dist/css/main.min.css' : 'app/css/main.css',
+                    // compile css file in app/css for debug purpose
                     'app/css/main.min.css' : 'app/css/main.css'
                 }
             }
@@ -73,10 +77,23 @@ module.exports = function(grunt) {
                     reporter: require('jshint-stylish')
                 },
                 files: {
-                    src: ['Gruntfile.js','./app/js/*.js', 'dist/js/*.js']
+                    src: ['Gruntfile.js','./app/js/*.js',]
                 }
             }
         }, // end jshint
+
+        babel: {
+            options: {
+              sourceMap: true,
+              presets: ['babel-preset-es2015']
+            },
+            files: {
+              expand: true,
+              src: ['./app/js/es6/*.es6'],
+              dest: './',
+              ext: '.js'
+            }
+        }, // end babel
 
         uglify: {
             build: {
@@ -84,7 +101,7 @@ module.exports = function(grunt) {
                     mangle: false
                 },
                 files: [ {
-                    cwd: './app/js/',
+                    cwd: './app/js/es6',
                     src: '*.js',
                     dest: 'dist/js',
                     expand: true,
@@ -102,19 +119,43 @@ module.exports = function(grunt) {
                 },
                 files: [ {
                     cwd: './app/images/',
-                    src: '**/*.{png,jpg,gif,svg}',
+                    src: '**/*.{png,jpg,gif,svg,jpeg}',
                     dest: 'dist/images',
                     expand: true,
                 } ]
             }
         }, // end imagemin
 
+        clean:  {
+          cleanDist: ['dist'],
+          cleanJS: ['dist/js/**.js', '!dist/js/bundle.js']
+        }, // end clean
+
+        copy: {
+          main: {
+            expand: true,
+            cwd: './app/font',
+            src: '**',
+            dest: 'dist/font',
+          },
+        }, // end copy
+
+        concat: {
+          options: {
+            separator: ';',
+          },
+          dist: {
+            src: ['./dist/js/**.js'],
+            dest: 'dist/js/bundle.js',
+          },
+        }, // end concat
+
         browserSync: {
             build: {
                 bsFiles: {
                     src: [
                         'app/*.html',
-                        'app/css/main.css',
+                        'app/css/*.css',
                         'app/js/**/*.js'
                     ]
                 },
@@ -137,33 +178,30 @@ module.exports = function(grunt) {
                 tasks: ['jade']
             },
             stylesheet: {
-                files: 'app/scss/main.scss',
-                tasks: ['sass', 'postcss']
+                files: './app/scss/**/*.scss',
+                tasks: ['sass', 'postcss:build', 'postcss:minify']
+            },
+            babel: {
+              files: '.app/js/es6/*.es6',
+              tasks: ['babel']
             },
             scripts: {
-                files: 'app/js/*.js',
+                files: './app/js/es6/*.js',
                 tasks: ['jshint', 'uglify']
             },
             images: {
-                files: ['app/images/**/*.{png,jpg,gif,svg}'],
+                files: ['./app/images/*.{png,jpg,gif,svg,jpeg}'],
                 tasks: ['imagemin:build']
             }
 
-        }, // end watch
+        } // end watch
 
 
     });
 
-    // enable plugins with call
-    grunt.loadNpmTasks('grunt-contrib-jade');
-    grunt.loadNpmTasks('grunt-postcss');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-browser-sync');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-
     // register tasks
     grunt.registerTask('default', ['browserSync', 'watch']);
+    // production task (minify everything and concat js files into bundle.js)
+    grunt.registerTask('production', ['clean:cleanDist', 'jade', 'copy', 'sass','postcss:build', 'postcss:minify', 'uglify', 'concat', 'imagemin:build', 'clean:cleanJS']);
 
 };

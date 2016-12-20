@@ -1,0 +1,54 @@
+// Basic Layout Styles
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering:optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  line-height:1.2;
+  font-family: Lato, sans-serif;
+  font-size: 1em;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  input {
+    appearance: none;
+    border: 0;
+    outline: 0;
+    border-radius: 0;
+    &[type="button"] {
+      appearance: button;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  &.no-scroll {
+    overflow-y: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Francesco-Starter-Kit",
+  "version": "1.0.0",
+  "description": "This is my personal starter kit, which contains the basic file structure and folder scaffolding to quickly start a new project. Took inspiration from http://devtipsstarterkit.com/",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gruntproduction": "grunt production",
+    "gulpproduction": "gulp production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/francesco-albanese/Francesco-Starter-Kit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/francesco-albanese/Francesco-Starter-Kit/issues"
+  },
+  "homepage": "https://github.com/francesco-albanese/Francesco-Starter-Kit#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "cssnano": "^3.9.1",
+    "grunt": "^1.0.1",
+    "grunt-babel": "^6.0.0",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-contrib-jade": "^1.0.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-postcss": "^0.8.0",
+    "grunt-sass": "^2.0.0",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "load-grunt-tasks": "^3.5.2",
+    "matchdep": "^1.0.1"
+  }
+}

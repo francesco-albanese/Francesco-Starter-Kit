@@ -1,0 +1,22 @@
+::selection {
+  background: $selection-color;
+  color: $black;
+}
+
+::-moz-selection {
+  background: $selection-color;
+  color: $black;
+}
+
+img::selection {
+  background: transparent;
+}
+
+img::-moz-selection {
+  background: transparent;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  color: $black;
+}

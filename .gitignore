@@ -4,6 +4,8 @@
 .AppleDouble
 .LSOverride
 config.codekit
+/node_modules
+yarn.lock
 
 # Icon must end with two \r
 Icon

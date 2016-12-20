@@ -1,0 +1,44 @@
+// typography
+h1 {
+  font-size: 3.125em;
+  font-family: 'Lato', sans-serif;
+  @media screen and (max-width: $container-large) {
+    font-size: 2.500em;
+  }
+  @media screen and (max-width: $container-medium) {
+    font-size: 1.875em;
+  }
+}
+
+h2,
+a[href^="tel:"] {
+  font-size: 2.813em;
+  font-family: 'Lato', sans-serif;
+  @media screen and (max-width: $container-large) {
+    font-size: 2.188em;
+  }
+  @media screen and (max-width: $container-medium) {
+    font-size: 1.563em;
+  }
+}
+
+h3 {
+  font-size: 2.188em;
+  font-family: 'Lato', sans-serif;
+  @media screen and (max-width: $container-large) {
+    font-size: 1.563em;
+  }
+  @media screen and (max-width: $container-medium) {
+    font-size: 0.938em;
+  }
+}
+
+h4 {
+  font-size: 1.500em;
+  font-family: 'Lato', sans-serif;
+}
+
+p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.750em;
+}
