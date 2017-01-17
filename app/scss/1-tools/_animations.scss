@@ -30,11 +30,6 @@
   }
 }
 
-@keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-
 @keyframes tada {
   from {
     transform: scale3d(1, 1, 1);
@@ -57,33 +52,6 @@
   }
 }
 
-@keyframes fadeInLeftBig {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-@keyframes fadeInRightBig {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
 
 @keyframes fadeIn {
   from {
@@ -95,19 +63,6 @@
   }
 }
 
-@keyframes fadeInDownBig {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
 
 @keyframes bounce {
   from, 20%, 53%, 80%, to {
@@ -137,56 +92,11 @@
   }
 }
 
-@keyframes bounceInLeft {
-  from, 60%, 75%, 90%, to {
-    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-  }
-
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(-3000px, 0, 0);
-    transform: translate3d(-3000px, 0, 0);
-  }
-
-  60% {
-    opacity: 1;
-    -webkit-transform: translate3d(25px, 0, 0);
-    transform: translate3d(25px, 0, 0);
-  }
-
-  75% {
-    -webkit-transform: translate3d(-10px, 0, 0);
-    transform: translate3d(-10px, 0, 0);
-  }
-
-  90% {
-    -webkit-transform: translate3d(5px, 0, 0);
-    transform: translate3d(5px, 0, 0);
-  }
-
-  to {
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
 .bounce {
   animation-name: bounce;
   animation-duration: 1.5s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-}
-
-.bounceInLeft {
-  animation-name: bounceInLeft;
-  animation-duration: 1.5s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
-}
-
-.opacity {
-  opacity: 0;
 }
 
 .fadeIn {
@@ -196,108 +106,9 @@
   animation-iteration-count: 1;
 }
 
-.fadeInDownBig {
-  animation-name: fadeInDownBig;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
-}
-
-.fadeInLeftBig {
-  animation-name: fadeInLeftBig;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
-}
-
-.fadeInRightBig {
-  animation-name: fadeInRightBig;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
-}
-
 .tada {
   animation-name: tada;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: 1;
-}
-
-.astrumLogo {
-  path {
-    transition: stroke-dashoffset 1s linear, fill .6s ease .9s;
-  }
-  .svg1 {
-    fill: transparent;
-    stroke: #fff;
-    stroke-width: 1px;
-    stroke-dasharray: 118.69804382324219px;
-    stroke-dashoffset: -118.69804382324219px;
-  }
-  .svg2 {
-    fill: transparent;
-    stroke: #fff;
-    stroke-width: 1px;
-    stroke-dasharray: 118.69804382324219px;
-    stroke-dashoffset: -118.69804382324219px;
-  }
-  .svg3 {
-    fill: transparent;
-    stroke: #fff;
-    stroke-width: 1px;
-    stroke-dasharray: 118.69804382324219px;
-    stroke-dashoffset: -118.69804382324219px;
-  }
-  .svg4 {
-    fill: transparent;
-    stroke: #fff;
-    stroke-width: 1px;
-    stroke-dasharray: 545.24169921875px;
-    stroke-dashoffset: -545.24169921875px;
-  }
-  .svg6 {
-    fill: transparent;
-    stroke: #fff;
-    stroke-width: 1px;
-    stroke-dasharray: 473.6961975097656px;
-    stroke-dashoffset: -473.6961975097656px;
-  }
-  .svg5 {
-    fill: transparent;
-    stroke: #fff;
-    stroke-width: 1px;
-    stroke-dasharray: 545.1317138671875px;
-    stroke-dashoffset: -545.1317138671875px;
-  }
-  &.animate {
-    .svg1 {
-      //fill: url(#SVGID_1_);
-      //fill: #67C7EC;
-      stroke-dashoffset: 0px;
-    }
-    .svg2 {
-      //fill: url(#SVGID_2_);
-      stroke-dashoffset: 0px;
-    }
-    .svg3 {
-      //fill: url(#SVGID_3_);
-      stroke-dashoffset: 0px;
-    }
-    .svg4 {
-      //fill: url(#SVGID_4_);
-      fill: #531664;
-      stroke-dashoffset: 0px;
-    }
-    .svg6 {
-      //fill: url(#SVGID_6_);
-      fill: #9D1981;
-      stroke-dashoffset: 0px;
-    }
-    .svg5 {
-      //fill: url(#SVGID_5_);
-      fill: #621D75;
-      stroke-dashoffset: 0px;
-    }
-  }
 }

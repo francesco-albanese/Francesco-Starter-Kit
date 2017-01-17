@@ -1,18 +1,5 @@
-'use strict';
+"use strict";
 
-var testFunc = function testFunc(msg) {
-  return console.log('This is your ' + msg);
-};
-var test = document.createElement('h1');
-test.textContent = 'No I can\'t believe it!';
-
-var i = ['1', 2];
-console.log('Testing from other.js');
-
-var wow = ['test', 'test2'];
-testFunc('Wow wow it works!');
-
-console.log(wow);
-console.log(i);
-document.body.appendChild(test);
+console.log("%cCurious? %cDo you want to find out more on how this is done?", "\n\tfont-family: Trebuchet MS, sans-serif;\n\tcolor: rgb(86, 151, 255);\n\tfont-size: 55px;\n\t", "font-family: Tahoma, sans-serif;\n\tfont-size: 18px;\n\tcolor: #3c6bdc");
+console.log("%cCheck out my Github Repo: %chttps://github.com/francesco-albanese/Francesco-Starter-Kit", "\n\tfont-family: Trebuchet MS, sans-serif;\n\tcolor: rgb(86, 151, 255);\n\tfont-size: 15px;\n\t", "font-family: Tahoma, sans-serif;\n\tfont-size: 12px;\n\tcolor: #3c6bdc;\n\tpadding-bottom: 2px;\n\tborder-bottom: 2px solid");
 //# sourceMappingURL=app.js.map

@@ -1,0 +1,35 @@
+pre {
+	font-size: 70px;
+	position: absolute;
+	top: 0;
+	z-index: -1;
+	color: $silver-darker;
+}
+
+.content-container {
+	max-width: 650px;
+	margin: 80px auto;
+	background-color: $primary-color-dark;
+	padding: $spacing-large;
+	text-align: center;
+	h1 {
+		margin-bottom: $spacing-large;
+	}
+
+	h3,
+	p {
+		margin-bottom: $spacing-base;
+	}
+
+	p {
+		font-size: 20px;
+	}
+
+	a {
+		padding: $spacing-small $spacing-medium;
+		border: 1px solid $silver-darker;
+		font-size: 20px;
+		display: inline-flex;
+		@include sweep-to-right($selection-color, $silver);
+	}
+}

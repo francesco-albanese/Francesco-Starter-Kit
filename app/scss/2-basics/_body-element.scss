@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-  background: rgba(#eee, 1%);
+  background-color: $accent-color;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering:optimizeLegibility;

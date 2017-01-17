@@ -18,7 +18,7 @@ const jsTask = (gulp, bs) => {
   .pipe(clean());
 
   gulp.task(`javascript`, () => {
-    return rollup({entry: sources.javascript.src, sourceMap: true, debug: true})
+    return rollup({entry: sources.javascript.src, sourceMap: true})
     .on('error', function(e) {
       console.error(`${e.stack}`);
       this.emit('end');
