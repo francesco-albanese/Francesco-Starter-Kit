@@ -40,7 +40,6 @@ Both gulp and grunt config files are assuming a folder structure like the follow
 package.json and yarn.lock have been included for your convenience so all you have to do to install all your dependencies is
 ```
 npm install
-
 ```
 if you use npm or
 ```
@@ -99,7 +98,7 @@ I took advantage of [ES2015 and Babel](https://babeljs.io/) to completely modula
 
 ###### Author
 
-* **Francesco Albanese** - *Version 1.0* - [Francesco-Starter-Kit](http://francesco-albanese.github.io/Francesco-Starter-Kit/)
+* **Francesco Albanese** - *Version 1.0* - [Francesco-Starter-Kit](http://francesco-albanese.github.io/Francesco-Starter-Kit/dist/)
 
 ## Acknowledgments
 
